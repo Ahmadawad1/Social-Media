@@ -1,0 +1,44 @@
+Create each table independently
+
+******************************
+
+
+
+
+
+create table Users(
+ID int auto_increment primary key,Name nvarchar(32) ,Email nvarchar(64),ProfileImage nvarchar(128),DateOfBirth nvarchar(32),CoverImage nvarchar(128),Place nvarchar(32),College nvarchar(64),Job nvarchar(64),Password nvarchar(255),Bio nvarchar(128),CreateDate nvarchar(32),Followers int default 0,Posts int default 0,Following int default 0
+,Phone nvarchar(32),Major nvarchar(32),Position nvarchar(32)
+)
+create table Posts(
+ID int auto_increment primary key,Poster int
+ ,Date Timestamp,ShareOrImageCaption nvarchar(255),Type nvarchar(16),PathOrText nvarchar(255)
+ ,SharedPostID int, Likes int default 0,Comments int default 0,Shares int default 0
+)
+create table Comments(
+ID int auto_increment primary key,CommenterID int
+ ,Date Timestamp,Comment nvarchar(255),Poster int
+ ,PostID int 
+)
+create table Messages(
+ID int auto_increment primary key,Sender int
+ ,Date Timestamp,Comment nvarchar(255),Receiver int
+ ,Content nvarchar(255)
+)
+create table Notifications(
+ID int auto_increment primary key,Sender int
+ ,Notified int,Date Timestamp,Content nvarchar(255)
+)
+
+create table Follow(
+ID int auto_increment primary key,Follower int
+ ,Followed int
+)
+create table Likes(
+ID int auto_increment primary key,Liker int
+,Poster int,
+ PostID int 
+)
+
+
+

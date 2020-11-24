@@ -1,0 +1,5 @@
+After creating the database  , Unzip WeRead Folder then open it .
+
+Run the Solution and Execute (Ctrl + F5 from) the SignIn View.
+
+ Enjoy !

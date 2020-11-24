@@ -1,0 +1,51 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1" />
+    <title>SignUp</title>
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/jquery.js"></script>
+  
+    <link href="~/Styles/SignUp.css" rel="stylesheet" />
+    <script src="~/Scripts/SignUp.js"></script>
+  
+  
+ 
+
+</head>
+<body style="background-image:url(~/Images/signup.jpg)">
+  <img src="~/Images/signup.jpg" id="bgImg" />
+  <div id="container">
+
+
+      @using (Html.BeginForm("SignUp", "SignUp", FormMethod.Post, new{@id = "form"}))
+      {
+          <img src="~/Images/weread.png" width="150" height="100" /><br />
+          <h3 style="color:white;">WeRead</h3>
+          <br />
+
+          <div id="IconPlusText"> <span id="icon"><img src="~/Images/male.png" width="20" height="20" /></span><div id="TextDiv" style="flex-direction:column;display:inline-flex;"><input autocomplete="off" id="fullname" name="fullname" placeholder="Username" type="text" /><label id="nameLabel"></label></div></div>
+          <br /><br /><br />
+          <div id="IconPlusText"> <div id="icon"><img src="~/Images/mail.png" width="20" height="20" /></div> <div id="TextDiv" style="flex-direction:column;display:inline-flex;"><input autocomplete="off"  name="email" placeholder="Email" id="email" type="email" /><label id="emailLabel">@ViewBag.Error</label></div></div>
+
+          <br /> <label style="color:#ff3b3b;font-weight:bolder">@ViewBag.RemoteValidation</label>
+      <br /><br />
+          <div id="IconPlusText"> <div id="icon"><img src="~/Images/lock.png" width="20" height="20" /></div><div id="TextDiv" style="flex-direction:column;display:inline-flex;"> <input type="password" id="password" name="password" placeholder="Password" /> <label id="passwordLabel"></label></div></div>
+          <br /><br /> <br /> <div id="IconPlusText"> <div id="icon"><img src="~/Images/lock.png" width="20" height="20" /></div><div id="TextDiv" style="flex-direction:column;display:inline-flex;">
+    <input type="password" name="confirm" placeholder="Confirm Password" id="confirm" /> <label id="confirmLabel"></label>
+</div></div>
+          <br /><br /><br />
+          <button id="button" type="button">Create New Account</button> <br /><br />
+      }
+
+
+  </div>
+</body>
+</html>

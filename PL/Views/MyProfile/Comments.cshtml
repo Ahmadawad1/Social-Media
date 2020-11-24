@@ -1,0 +1,78 @@
+﻿
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<link href="~/Styles/MyProfile.css" rel="stylesheet" />
+<script src="~/Scripts/MyProfile.js"></script>
+  <center class="Comments" >
+    @if (ViewBag.PostInfo.Type == "Text")
+    {
+      <div style="display:inline-flex;padding:10px;width:100%">
+
+          <div><img id="SmallImage" src="@Url.Content(ViewBag.Image)" /></div>
+          <div id="PostHead" >
+              <h5>@ViewBag.PosterName</h5>
+              <p id="Date" style="margin-top:-10px">@ViewBag.PostInfo.Date</p>
+          </div>
+         
+           
+          @*<i class= "fa fa-chevron-left" onclick="Back()" id="Back"></i>*@
+          
+
+      </div>
+        <p id="Caption">@ViewBag.PostInfo.PathOrText</p>
+    }
+    else if (ViewBag.PostInfo.Type == "Image")
+    {
+  <div style="display:inline-flex;padding:10px;width:100%">
+
+      <div><img id="SmallImage" src="@Url.Content(ViewBag.Image)" /></div>
+      <div id="PostHead" >
+          <h5>@ViewBag.PosterName</h5>
+          <p id="Date" style="margin-top:-10px">@ViewBag.PostInfo.Date</p>
+      </div>
+
+      @*@Html.ActionLink(" ", "MyProfile", "MyProfile", null, new { @class = "fa fa-chevron-left", @style = "color:black;text-decoration:none;margin-left:45%" })*@
+
+
+
+  </div>
+        <p id="Caption">@ViewBag.PostInfo.ShareOrImageCaption</p>
+        <img src="@Url.Content(ViewBag.PostInfo.PathOrText)" id="PostImageComment"  />
+    }
+
+      </center>
+<center class="Comments" style="display:inline-flex">
+    <input class="form-control"  placeholder="Abc..." type="text" autocomplete="off" id="CommentText" style="width:90%"/>
+    <button class="fa fa-send btn btn-primary" onclick="AddComment('@ViewBag.PostID')"></button>
+   
+</center>
+<center class="Comments">
+    @if (ViewBag.Comments.Count==0)
+    {
+        <p id="NoComment">No Comments Yet</p>
+    }
+    else
+    {
+
+
+    <ul id="CommentsList">
+        <li style="margin:10px;">@ViewBag.Comments.Count Comments</li>
+       @foreach (var i in ViewBag.Comments)
+       {
+          
+        <li id="CommentItem">
+            <div style="display:inline-flex">
+                <div><img width="35" height="35" style="border:1px solid #fff;border-radius:100%" src="@Url.Content(i.Image)" /></div>
+                <div>
+                    <p>@i.Name</p>
+                    <p id="Date" style="margin-top:-20px;font-size:10px">@i.Date</p>
+                </div>
+            </div>
+            <p style="display:block">@i.Comment</p>
+
+        </li>
+       }
+    </ul>
+    }
+</center>

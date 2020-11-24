@@ -1,0 +1,70 @@
+﻿
+#discussion {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display:block;
+    max-height:500px;
+    overflow:auto
+}
+
+#ResultImage {
+    margin-left: 30%;
+    margin-top: 50px
+}
+
+#BackConversation {
+    color: black;
+    text-decoration: none;
+    margin-left: 35%;
+    margin-top: 2%;
+    cursor: pointer;
+    position: absolute
+}
+
+#NoResult {
+    font-size: 22px;
+    margin-left: 25%
+}
+
+#toMe {
+    font-size: 15px;
+    padding: 10px;
+    background-color: #fff;
+    border-radius: 30px;
+    
+    max-width: 50%;
+   
+    word-wrap: break-word;
+}
+
+#fromMe {
+    font-size: 15px;
+    padding: 10px;
+    background-color: #808080;
+    border-radius: 30px;
+   margin-left:50%;
+    max-width: 50%;
+    word-wrap: break-word;
+}
+
+@media screen and (max-width:1180px) {
+    #fromMe {
+        margin-left: 75% !important
+    }
+}
+
+@media screen and (max-width:430px) {
+    #ResultImage {
+        margin-left: 15% !important;
+    }
+
+    #fromMe {
+        margin-left: 73% !important
+    }
+
+    #NoResult {
+        margin-left: 1% !important;
+        font-size: 20px !important;
+    }
+}

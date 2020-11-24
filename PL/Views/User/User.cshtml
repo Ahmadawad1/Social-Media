@@ -1,0 +1,302 @@
+﻿
+@model DAL.Users
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+
+<link href="~/Styles/MyProfile.css" rel="stylesheet" />
+<script src="~/Scripts/MyProfile.js"></script>
+
+<center id="ProfileInfo">
+    <img src="@Url.Content(Model.CoverImage)" data-toggle="modal" data-target="#CoverModal" id="CoverImage" />
+    <img src="@Url.Content(Model.ProfileImage)" data-toggle="modal" data-target="#ImageModal" id="ProfileImage" />
+
+    <br />
+    <h2 id="Name">@Model.Name</h2>
+    @if (Model.Bio != null)
+    {
+        <h6 id="Bio" data-toggle="modal" data-target="#BioModal">@Model.Bio</h6>
+    }
+    <br />
+    @if (ViewBag.IsFollowed)
+    {
+        <button id="Follow" class="btn btn-secondary" onclick="Follow('@Model.Email','@Session["Email"].ToString()')">Unfollow</button>
+    }
+    else
+    {
+        <button id="Follow" class="btn btn-primary" onclick="Follow('@Model.Email','@Session["Email"].ToString()')">Follow</button>
+    }
+
+
+<a href="/Chat/Conversation?contactId=@Model.ID"><span class="btn btn-light" style="padding:5px"><i class="fa fa-envelope" style="color:#633312;font-size:25px"></i></span></a>
+</center>
+
+
+<center id="Numbers">
+    <h5 id="PostsNumber">@Model.Posts Posts</h5>
+    <h5 id="FollowersNumber" data-toggle="modal" data-target="#FollowersModal">@Model.Followers Followers</h5>
+    <h5 id="FollowingNumber" data-toggle="modal" data-target="#FollowingModal">@Model.Following Following</h5>
+</center>
+
+
+<center id="InfoAndPosts">
+    <div id="Info">
+        @if (Model.DateOfBirth != null && Model.College != null && Model.Job != null)
+        {
+            <h4 id="InfoHeader">Personal Info</h4>
+        }
+        else
+        {
+            <h4 id="InfoHeader"> No Personal Info</h4>
+        }
+        @if (!String.IsNullOrWhiteSpace(Model.Job))
+        {
+            if (!String.IsNullOrWhiteSpace(Model.Position))
+            {
+                <span id="InfoElement">
+
+                    <img height="20" width="20" src="~/Images/work.png" /> &nbsp; @Model.Position at <bold> @Model.Job</bold>
+
+                </span>
+            }
+            else
+            {
+                <span id="InfoElement">
+                    <img height="20" width="20" src="~/Images/work.png" />&nbsp; Works at  <bold> @Model.Job</bold>
+                </span>
+            }
+
+        }
+        @if (!String.IsNullOrWhiteSpace(Model.College))
+        {
+            if (!String.IsNullOrWhiteSpace(Model.Major))
+            {
+                <span id="InfoElement">
+
+                    <img height="20" width="20" src="~/Images/study.png" /> &nbsp; @Model.Major at  <bold> @Model.College</bold>
+                </span>
+            }
+
+
+            else
+            {
+                <span id="InfoElement">
+                    <img height="20" width="20" src="~/Images/study.png" /> &nbsp; Studies at <bold> @Model.College</bold>
+                </span>
+            }
+
+        }
+
+        @if (!String.IsNullOrWhiteSpace(Model.DateOfBirth))
+        {
+            <span id="InfoElement"><img height="20" width="20" src="~/Images/birthday-cake.png" /> &nbsp;@Model.DateOfBirth </span>
+        }
+       
+    </div>
+    <div id="Contacts">
+        <h4 id="InfoHeader">Contacts Info</h4>
+
+        <span id="InfoElement">
+            <img height="20" width="20" src="~/Images/email.png" /> &nbsp; @Model.Email
+        </span>
+        @if (!String.IsNullOrWhiteSpace(Model.Phone))
+        {
+            <span id="InfoElement">
+                <img height="20" width="20" src="~/Images/phone.png" /> &nbsp; @Model.Phone
+            </span>
+        }
+        @if (!String.IsNullOrWhiteSpace(Model.Place))
+        {
+            <span id="InfoElement">
+                <img height="20" width="20" src="~/Images/location.png" /> &nbsp;@Model.Place
+            </span>
+        }
+
+
+
+    </div>
+
+</center>
+
+@if (ViewBag.Posts.Count > 0)
+{
+
+
+    foreach (var post in ViewBag.Posts)
+    {
+        <center class="Posts" id="@post.ID">
+
+
+            @if (post.Type == "Text")
+            {
+                <div style="display:inline-flex;padding:10px;">
+
+                    <div><img id="SmallImage" src="@Url.Content(Model.ProfileImage)" /></div>
+                    <div>
+                        <h5>@Model.Name</h5>
+                        <p id="Date" style="margin-top:-10px">@post.Date</p>
+                    </div>
+                    <input type="hidden" id="PostID" name="PostID" value="@post.ID">
+                  
+                </div>
+                <p id="Caption">@post.PathOrText</p>
+            }
+            else if (post.Type == "Image")
+            {
+                <div style="display:inline-flex;padding:10px;">
+
+                    <div><img id="SmallImage" src="@Url.Content(Model.ProfileImage)" /></div>
+                    <div>
+                        <h5>@Model.Name</h5>
+                        <p id="Date" style="margin-top:-10px">@post.Date</p>
+                    </div>
+                    <input type="hidden" id="PostID" name="PostID" value="@post.ID">
+                   
+                </div>
+                <p id="Caption">@post.ShareOrImageCaption</p>
+                <img src="@Url.Content(post.PathOrText)" id="PostImage" />
+            }
+
+            <div id="ReactionsNumbers"><label id="LikeNumber">@post.Likes </label><p class="Word">Likes</p>  <label id="CommentNumber">@post.Comments </label> <p class="Word">Comments</p><label id="ShareNumber">@post.Shares </label><p class="Word">Shares</p></div>
+            <div id="Reactions">
+                @if (ViewBag.Likes.Count > 0)
+                {
+                    bool isLiked = false;
+                    foreach (var i in ViewBag.Likes)
+                    {
+
+                        if (i.PostID == post.ID && (i.Liker ==Convert.ToInt32(Session["ID"])))
+                        {
+                            isLiked = true;
+                        }
+                    }
+                    if (isLiked)
+                    {
+                        <button id="Like" style="color:#c3c3c3" onclick="Like('@post.ID','@Session["ID"].ToString()','@Model.ID',@post.Likes)"> <img src="~/Images/like.png" style="opacity:0.2" width="20" height="20" id="LikeIcon" />&nbsp; Like</button>
+
+                    }
+                    else
+                    {
+                        <button id="Like" onclick="Like('@post.ID','@Session["ID"].ToString()','@Model.ID',@post.Likes)"> <img src="~/Images/like.png" width="20" height="20" id="LikeIcon" />&nbsp; Like</button>
+                    }
+
+
+
+
+                }
+                else
+                {
+                    <button id="Like" onclick="Like('@post.ID','@Session["ID"].ToString()','@Model.ID',@post.Likes)"> <img src="~/Images/like.png" width="20" height="20" id="LikeIcon" />&nbsp; Like</button>
+                }
+
+                @Html.ActionLink(" Comments", "Comments", "MyProfile", new { @postID = post.ID, @poster = Model.Email,@posterID=Model.ID }, new { @id = "Comment", @target = "_blank", @class = "fa fa-comments", @style = "text-decoretion:none;padding-left:45px;font-size:20px" })
+                <button id="Share"> <img src="~/Images/share.png" width="20" height="20" id="ShareIcon" />&nbsp;Share</button>
+            </div>
+        </center>
+    }
+
+}
+else
+{
+    <center id="Posts" style="text-align:center;padding:50px;">
+        <h4>No Posts Yet !</h4>
+    </center>
+}
+<center id="Posts" style="text-align:center;padding:15px;">
+    <h6 style="font-weight:bolder">Joined Since @Model.CreateDate</h6>
+</center>
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+
+
+
+<div class="modal fade" id="FollowingModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Following</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="margin: 0; padding: 0">
+                @if (ViewBag.Following.Count > 0)
+                {
+                    <ul style="list-style-type:none;margin:0;padding:0">
+                        @foreach (var i in ViewBag.Following)
+                        {
+                        <li style="padding:10px;background-color:white;border-bottom:1px solid black">
+                            <img width="60" height="60" style="border-radius:100%" src="@Url.Content(i.ProfileImage)" /> <text style="color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">@i.Name</text>
+                        </li>
+                        }
+
+                    </ul>
+                }
+                else
+                {
+                    <h4 style="margin:15px">No Following Yet</h4>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="FollowersModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Followers</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" style="margin: 0; padding: 0">
+                @if (ViewBag.Followers.Count > 0)
+                {
+                    <ul style="list-style-type:none;margin:0;padding:0">
+                        @foreach (var i in ViewBag.Followers)
+                        {
+                        <li style="padding:10px;background-color:white;border-bottom:1px solid black">
+                            <img width="60" height="60" style="border-radius:100%" src="@Url.Content(i.ProfileImage)" /> <text style="color:black;font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif">@i.Name</text>
+                        </li>
+                        }
+
+                    </ul>
+                }
+                else
+                {
+                    <h4 style="margin:15px">No Followers Yet</h4>
+                }
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Dismiss</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="CommentModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle"><label id="CommentLabelNumber"></label> Comments </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="CommentPostID" name="id" />
+                <label id="NoCommentsYet"></label>
+                <ul id="CommentsList">
+                </ul>
+            </div>
+            <div class="modal-footer">
+                <input autocomplete="off" type="text" id="CommentText" placeholder="Comment" name="comment" class="form-control" style="width:74%" /><button onclick="AddComment()" class="btn btn-primary" type="button"><img width="15" height="15" src="~/Images/send.png" /></button> <button type="button" class="btn btn-danger" data-dismiss="modal"><img width="15" height="15" src="~/Images/cancel.png" /></button>
+            </div>
+        </div>
+    </div>
+</div>

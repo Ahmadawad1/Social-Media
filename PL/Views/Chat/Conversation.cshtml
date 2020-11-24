@@ -1,0 +1,86 @@
+﻿@model BLL.Conversation
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<link href="~/Styles/MyProfile.css" rel="stylesheet" />
+<link href="~/Styles/Conversation.css" rel="stylesheet" />
+<script src="~/lib/SignalR/jquery.signalR-2.2.2.js"></script>
+<script src="~/SignalR/Hubs"></script>
+<center class="Comments" style="padding:0;">
+    <i class="fa fa-chevron-left" onclick="BackConversation()" id="BackConversation"></i>
+    @if (Model.Messages.Capacity == 0)
+    {
+        <div style="display:inline-flex;padding:10px;"> <img width="65" height="65" style="border:1px solid #fff;border-radius:100%;" src="@Url.Content(Model.Contact.ProfileImage)" />&nbsp;&nbsp; <h3 style="margin-top:15px" id="ConversationName"> @Model.Contact.Name</h3></div>
+        <br />
+        <hr />
+        <p id="NoResult">Start a Conversation </p>
+        <ul id="discussion"></ul>
+        <br />
+    }
+    else
+    {
+        <div style="display:inline-flex;padding:10px"><img width="65" height="65" style="border:1px solid #fff;border-radius:100%" src="@Url.Content(Model.Contact.ProfileImage)" />&nbsp;&nbsp; <h3 style="margin-top:15px" id="ConversationName"> @Model.Contact.Name</h3></div>
+        <br />
+        <hr />
+        <ul id="discussion" >
+            @foreach (var i in Model.Messages)
+            {
+
+                if (i.Sender == Model.Contact.ID)
+                {
+                    <li id="toMe">@i.Content</li> 
+                }
+                else
+                {
+                    <li id="fromMe">@i.Content</li>
+                }
+            }
+        </ul>
+    }
+</center>
+<center class="Comments" style="display:inline-flex">
+    <input class="form-control" placeholder="Abc..." type="text" autocomplete="off" id="CommentText" style="width:93%" />
+    <button class="fa fa-send btn btn-primary" id="SendBtn"></button>
+</center>
+<script>
+function BackConversation()
+{
+window.location.href = '/Chat/Contacts?id=' +@Session["ID"];
+}
+    function htmlEncode(value)
+    {
+    var encodedValue = $('<div />').text(value).html();
+    return encodedValue;
+    }
+    $(document).ready(function () {
+
+    var chat = $.connection.chatHub;
+    chat.client.callBack = function (message,sender)
+    {
+        if (sender ==@Convert.ToInt32(Session["ID"]))
+        {
+            $('#discussion').append('<li id="fromMe">' + htmlEncode(message) + '</li>');
+            $("#NoResult").hide();
+        }
+        else
+        {
+            $('#discussion').append('<li id="toMe">' + htmlEncode(message) + '</li>'); $("#NoResult").hide();
+        }
+    };
+        $('#CommentText').focus();
+    $.connection.hub.start().done(function ()
+    {
+        $('#SendBtn').click(function ()
+        {
+            var msg = $('#CommentText').val();
+            if (msg.length > 0)
+            {
+            chat.server.send(@Convert.ToInt32(Session["ID"]), msg,@Model.Contact.ID);
+                $('#CommentText').val('').focus();
+            }
+        });
+    });
+    });
+</script>
+

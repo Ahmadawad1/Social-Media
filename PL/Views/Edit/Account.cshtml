@@ -1,0 +1,57 @@
+﻿@model DAL.Users
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<link href="~/Styles/Account.css" rel="stylesheet" />
+<script src="~/Scripts/Account.js"></script>
+<center class="Content">
+
+    <h3>Account Settings <img src="~/Images/settings.png" width="25" height="25" /></h3><br />
+    @using (Html.BeginForm("ChangeName", "Edit", FormMethod.Post, new { @id = "form1" }))
+    {
+        <h5>Username<img src="~/Images/male.png" draggable="false" width="25" height="25" /></h5>
+        <input type="text" autocomplete="off" placeholder="Abc..." name="fullname" id="fullname" value="@Model.Name" /><button type="button" id="SaveName"><i class="fa fa-save"></i></button>
+        <label id="nameLabel"></label>
+    }
+    <hr />
+    @using (Html.BeginForm("ChangeEmail", "Edit", FormMethod.Post, new { @id = "form2" }))
+    {
+        <h5>Email Address <img draggable="false" src="~/Images/mail.png" width="25" height="25" /> </h5>
+        <input type="email" autocomplete="off" placeholder="New Email" id="email" name="email" /><button type="button" id="SaveEmail"><i class="fa fa-save"></i></button>
+        <label id="emailLabel">@ViewBag.RemoteValidation</label>
+    }
+    <hr />
+    @using (Html.BeginForm("ChangePassword", "Edit", FormMethod.Post, new { @id = "form3" }))
+    {
+        <h5>Password <img draggable="false" src="~/Images/lock.png" width="25" height="25" /> </h5>
+        <input type="password" autocomplete="off" id="password" name="password" placeholder="New Password" /><input type="password" id="confirm" autocomplete="off" name="confirm" placeholder="Confirm New Password" /><button type="button" id="SavePassword"><i class="fa fa-save"></i></button>
+        <br /><label id="passwordLabel">@ViewBag.PasswordValidation</label>
+
+        <br /><br />
+
+    }
+    <button data-toggle="modal" data-target="#DeleteModal" id="Delete">Delete Account</button>
+</center>
+
+@using (Html.BeginForm("DeleteAccount", "Edit", FormMethod.Post))
+{
+    <div class="modal fade" id="DeleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true" style="border:2px solid red">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Edit Contact Info</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                <input type="hidden" value="@Model.ID" name="id" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Keep it</button>
+                    <button type="submit" class="btn btn-danger">Delete Account</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

@@ -1,0 +1,362 @@
+﻿* {
+    font-family: 'Arial Unicode MS';
+}
+*::selection{
+    color:black
+}
+#MainContent{
+    width:100%;
+    height:auto;
+    min-height:100%;
+    display:block;
+    margin-top:70px;
+    background-image:linear-gradient(to right,#8e7869,#633312);
+    position:absolute;
+    
+}
+
+input:focus, button:focus {
+    outline: none !important;
+}
+#SearchItem:last-child {
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+#SearchItem:first-child {
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+
+#SearchItem {
+    width: 100%;
+    padding: 10px;
+    border-bottom: 1px solid #c4c2c2;
+    cursor: pointer;
+    transition: ease 0.5s;
+}
+
+#SearchItem:hover{
+    background-color:#b5a79d
+}
+#SearchTxt {
+    font-size: 15px;
+    font-family:'Arial Unicode MS';
+    color: #633312 !important;
+}
+#Notification {
+    list-style-type: none;
+    position: absolute;
+    margin-top: 50px;
+    color: black;
+    margin-left: -100px;
+    height: 250px;
+    width: 400px;
+    background-color: whitesmoke;
+    border: 1px solid black;
+    border-radius: 3px;
+    min-width: 160px;
+    z-index: 10;
+    padding:10px;
+    display: none;
+    overflow-y:auto;
+}
+#SearchResult {
+    padding: 0;
+    position: absolute;
+    z-index: 100;
+    width: 20%;
+    
+   margin-left:25%;
+    margin-top: -13px;
+    list-style-type: none;
+    background-color: whitesmoke;
+    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+}
+#MenuAccount {
+    list-style-type: none;
+    position: absolute;
+    margin-top: 50px;
+    color: black;
+    margin-left: -150px;
+    height:250px;
+  
+    width: 300px;
+    background-color:whitesmoke;
+    border: 1px solid black;
+    border-radius: 3px;
+    min-width: 160px;
+    display: none;
+    z-index: 10;
+}
+
+#MenuAccount span {
+   width:100%;
+ position:absolute;
+padding:15px;
+    cursor: pointer;
+    transition:0.5s ease;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+    #MenuAccount span:hover:not(#SignOut) {
+       background-color:#b0a4a4
+      
+    }
+    #SignOut{
+        border-top:1px solid #858585
+    }
+#SignOut:hover {
+   background-color:#bb2328
+}
+    #navBar {
+        background-color:#755139FF;
+        height: 70px;
+        width: 100%;
+        position: fixed;
+        top: 0;
+        z-index: 2;
+        padding: 10px;
+    }
+#imgLogo{
+    margin-left:8%;
+}
+#HeaderWeRead {
+    display: inline-flex;
+    font-family: 'Arial Unicode MS';
+    color: white;
+    font-weight: bold;
+}
+#ProfileIconImage{
+   background-color:white;
+    border-radius: 100%;
+    margin-right:8px
+}
+
+
+#Search {
+    background-color: whitesmoke;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    background-color: whitesmoke;
+    color: black;
+    width: 20%;
+    border: hidden;
+   
+    height: 30px;
+    padding: 3px;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    transition: 0.5s ease
+}
+#SearchImg{
+    width:30px;
+    height:30px;
+   
+}
+#SearchIcon {
+ 
+    padding: 7px;
+    
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    background-color: whitesmoke;
+    color: black;
+    cursor: pointer;
+    margin-left: 5%;
+
+}
+#OptionsIcon {
+    cursor: pointer;
+    transition: ease 0.5s;
+    display:none;
+    float:right;
+    margin:7px 13px 0 0;
+}
+    #OptionsIcon:hover{
+        opacity:0.5
+    }
+    #ProfileIcon:hover {
+        background-color: white;
+        color: black;
+        transition: ease 0.5s;
+    }
+#ProfileIcon{
+    padding:10px 10px 13px 0;
+    margin-left:6%;
+    border-radius:20px;  
+   cursor:pointer;
+   font-family:Arial;
+   font-weight:bold;
+    border:1px white solid;
+    color:white;
+}
+text:not(#Username) 
+{
+    font-family: Arial;
+    font-weight: bold;
+  margin-left:10px;
+    color: white;
+}
+
+#FeedIcon ,#ChatIcon{
+    margin-left: 5%;
+    cursor: pointer;
+    transition: ease 0.5s;
+}
+#NoNoti {
+    margin-left: 15%;
+   margin-top:10%;
+   position:relative;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+
+}
+#NotiImage{
+    border-radius:100%;
+    width:50px;
+    height:50px
+}
+#NotiContent{
+    color:#755139FF !important;
+    font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif
+}
+#NotiName {
+    color: black !important;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+#NotificationItem{
+    width:100%;
+    margin:0;
+ 
+    font-size:15px !important
+}
+#BellIcon {
+    margin-left: 5%;
+    cursor: pointer;
+    transition: ease 0.5s;
+}
+#HeaderIcons:hover{
+  opacity:0.5;
+}
+#navBarY {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    z-index:3;
+    margin-top: 70px;
+    border-top: 1px white solid;
+    background-color: #755139FF;
+}
+#HideNoti{
+    color:black;
+    margin-left:10%;
+    margin-bottom:20px;
+    margin-top:10px
+}
+#navBarNoti {
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    z-index: 4;
+    margin-top: 70px;
+    border-top: 1px white solid;
+    background-color: white;
+}
+#IconList{
+  padding:0;
+    list-style-type:none;
+}
+#IconList a{
+    padding:20px;
+    border-bottom:1px white solid;
+    cursor:pointer;
+    display:block;
+    text-decoration:none;
+    transition:0.5s ease;
+}
+    #IconList a:hover {
+     background-color:#633312;
+    }
+
+@media screen and (max-width:1200px) {
+   #SearchResult,#SearchItem{
+       width:100% !important;
+       margin-left:-10px !important;
+       border-radius:0;
+   }
+
+}
+
+@media screen and (max-width:980px){
+    #ProfileIcon{
+       border:hidden
+    }
+    #Username{
+        display:none !important;
+    }
+}
+@media screen and (max-width:740px)
+{
+    #HeaderIcons {
+        margin-left: 15px;
+       
+    }
+   
+    #Notification{
+        width:100% !important;
+        margin-left:-70% !important
+    }
+    #IconContainer{
+        width:100% !important
+    }
+    #ProfileIcon{
+        margin-left:5px;
+    }
+}
+
+@media screen and (max-width:670px) {
+   
+   #HeaderWeRead{
+       display:none
+   }
+   
+   
+}
+@media screen and (max-width:485px) {
+    #imgLogo {
+        margin-left: 1%;
+    }
+  
+}
+@media screen and (min-width:435px)
+{
+    #navBarY{
+        display:none !important
+    }
+}
+    @media screen and (max-width:435px) {
+        #IconContainer {
+            display: none;
+        }
+
+        #OptionsIcon {
+            display: inline-flex;
+        }
+
+        #Search {
+            width: 50%;
+        }
+
+        #Username {
+            display: inline-flex !important
+        }
+
+        #ProfileIcon:hover {
+            background-color: #633312;
+            color: white;
+            transition: ease 0.5s;
+        }
+    }

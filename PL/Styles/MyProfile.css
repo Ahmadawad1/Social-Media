@@ -1,0 +1,416 @@
+﻿* {
+    font-family: 'Arial Unicode MS';
+}
+    *::selection {
+        color: white;
+        background-color:black
+    }
+#ProfileInfo{
+    border-radius: 3px;
+    box-shadow: 0 8px 6px -6px black;
+    width: 60%;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: #c3b8b8;
+    margin-left: 20%;
+    margin-bottom:10px;
+}
+input:focus, button:focus {
+    outline: none
+}
+#Back {
+    color: black;
+    text-decoration: none;
+    margin-left: 45%;
+    cursor: pointer
+}
+
+#PostHead {
+    width: 60%;
+}
+.Posts 
+{
+
+    border-radius: 3px;
+    box-shadow: 0 8px 6px -6px black;
+    width: 43%;
+    text-align: left;
+    background-color: #c3b8b8;
+    margin-left: 28%;
+    margin-bottom: 10px;
+}
+#PostImageComment {
+  width:100%;
+ height:400px
+}
+#NoComment{
+    font-size:26px;
+    margin:10px;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif
+}
+.Comments {
+    height: auto;
+  
+    width: 40%;
+    margin-left: 30%;
+    border-radius: 3px;
+    box-shadow: 0 8px 6px -6px black;
+    text-align: left;
+    background-color: #c3b8b8;
+    border-bottom: 1px solid white
+}
+
+#AddBioLink
+{
+    cursor:pointer;
+    color:#0c87ef;
+}
+#AddPostImg {
+    cursor: pointer;
+  transition:ease 1s;
+}
+#AddPostImg:hover
+{
+    transform:rotate(180deg);
+}
+#AddPost {
+    border-radius: 10px;
+    box-shadow: 0 8px 6px -6px black;
+    width: 100px;
+    text-align: center;
+    padding: 10px;   
+  
+    background-color: #c3b8b8;
+    margin-left: 45%;
+    margin-bottom: 10px;
+}
+bold
+{
+    font-weight:bolder
+}
+#Numbers {
+    padding: 15px;
+    border-radius: 3px;
+    box-shadow: 0 8px 6px -6px black;
+    width: 60%;
+    text-align: center;
+    padding-bottom: 10px;
+    background-color: #c3b8b8;
+    margin-left: 20%;
+    display: inline-flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+#InfoAndPosts {
+  
+    border-radius: 3px;  
+    width: 60%;   
+    padding-bottom: 10px; 
+    margin-left: 20%;
+    display: inline-flex;
+    flex-direction: row
+}
+#PostsNumber, #FollowersNumber, #FollowingNumber {
+    margin-left: 15%;
+    font-weight: bolder;
+    font-family: 'Arial Rounded MT';
+    cursor: pointer;
+    transition: 0.7s ease;
+}
+    #FollowersNumber:hover, #FollowingNumber:hover{
+      
+        opacity:0.7
+    }
+#Name, #InfoHeader {
+    font-weight: bolder;
+}
+#Reactions{
+    width:100%;
+    display:inline-flex
+}
+
+#Like, #Comment, #Share {
+    width: 33.3%;
+    background-color: white;
+    border-right: 1px solid #c3c3c3;
+    border-top: hidden;
+    border-left:hidden;
+    border-bottom:hidden;
+    padding: 10px;
+    color: black;
+  text-decoration:none;
+   transition:0.5s ease;
+    
+}
+
+#ReactionsNumbers{
+    display:inline-flex
+}
+.Word {
+    font-size: 13px;
+    margin-left:-5px;
+
+}
+#LikeNumber,#CommentNumber,#ShareNumber {
+    font-size: 13px;
+    margin-left: 7px;
+    margin-right: 10px;
+}
+#Like:hover,#Comment:hover,#Share:hover{
+    background-color:#b1b1b1;
+    
+}
+#Caption{
+    padding-left:10px;
+    word-wrap:break-word;
+}
+
+#PostImage
+{
+    width:100%;
+    max-height:500px;
+}
+#SmallImage {
+    border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    border: 1px solid black;
+    margin-right: 5px;
+}
+#Date{
+   opacity:0.7
+}
+#CommentItem{
+    margin-bottom:10px;
+    width:100%;
+    background-color:#d7d7d7;
+ border-radius:10px;
+ padding:10px;
+ display:block}
+#CommentsList{
+    list-style-type:none;
+    width:100%;
+   padding:5px;
+}
+#ProfileImage
+{
+    z-index:2;
+border-radius:100%;
+width:200px;
+height:200px;
+margin-top:-180px;
+cursor:pointer;
+transition:0.5s ease;
+border:1px white solid;
+
+}
+#ProfileImage:hover,#Bio:hover,#AddPostImg:hover{
+    opacity:0.8
+}
+#Bio {
+    font-weight: 500;
+    cursor: pointer;
+    transition: 0.5s ease;
+    width: 50%;
+   margin-left:25%;
+    word-wrap: break-word;
+}
+
+#CoverImage {
+    z-index: 1;
+    width: 100%;
+    height: 250px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+#Info {
+    text-align: left;
+    padding: 20px 20px 20px 30px;
+    border-radius: 3px;
+    box-shadow: 0 8px 6px -6px black;
+    width: 48%;
+    background-color: #c3b8b8;
+    margin-right: 3%;
+    color: #573013;
+    display: block;
+    max-height: 250px;
+    position: sticky;
+}
+
+
+
+#Contacts {
+    text-align: left;
+    padding: 20px 20px 20px 30px;
+    border-radius: 3px;
+    box-shadow: 0 8px 6px -6px black;
+    width: 50%;
+    background-color: #c3b8b8;
+    color: #573013;
+    display: block;
+    max-height: 250px;
+    position: sticky;
+}
+
+#PostIcons{
+margin-left:36%;
+position:absolute;
+margin-top:10px;
+display:inline-block;
+}
+#MenuButton{
+  cursor:pointer;
+  transition:0.5s ease;
+}
+#MenuButton:hover {
+    transform:scale(1.5)
+}
+
+    #NoPostsYet {
+        margin-left: 140px;
+        margin-top: 70px;
+        font-size: 20px
+    }
+#InfoElement{
+    display:block;
+    margin-bottom:5px
+}
+#EditInfoButton {
+    width: 90%;
+    margin-left: 4%;
+    color: black;
+    margin-top: 10px;
+    background-color: #755139FF;
+    border: hidden;
+    padding: 5px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.5s ease;
+}
+    #EditInfoButton:hover
+    {
+        background-color: #7e7474;
+    }
+@media screen and (max-width:1200px) {
+    #Comment{
+        padding-left:25px !important
+    }
+}
+    @media screen and (max-width:1070px) {
+        #ProfileInfo, #Numbers {
+            width: 80%;
+            margin-left: 100px !important;
+        }
+        #Comment {
+            padding-left: 55px !important
+        }
+        #MenuButton {
+            margin-left: 252px;
+        }
+        
+        #InfoAndPosts {
+            width: 100% !important;
+            margin-left: 100px !important;
+        }
+        #BackConversation {
+            margin-left:50% !important;
+            margin-top:5% !important;
+        }
+        #Info, #Contacts {
+            width: 38.5% !important;
+            margin-bottom: 15px;
+        }
+        #PostIcons {
+            margin-left: 72% !important
+        }
+        .Posts {
+            width: 80%;
+            height: 100%;
+            margin-left: 10% !important;
+        }
+        .Comments {
+            width: 60%;
+            margin-left:20% !important;
+        }
+    }
+
+    @media screen and (max-width:770px) {
+        center:not(#AddPost) {
+            width: 100% !important;
+            margin-left: 0 !important;
+        }
+        #BackConversation {
+            margin-left: 90% !important
+        }
+        #ProfileInfo, #Numbers {
+            margin-left: 0 !important;
+        }
+
+        #InfoAndPosts {
+            flex-direction: column;
+            margin-left: 0 !important;
+        }
+
+        #Info, #Contacts {
+            width: 100% !important;
+            margin-bottom: 15px;
+        }
+
+        .Posts {
+            overflow: unset !important;
+            height: 100%;
+            margin-left: 0 !important;
+        }
+        #PostIcons {
+            margin-left: 82% !important
+        }
+
+        #MenuButton {
+            margin-left: 252px;
+        }
+    }
+
+    @media screen and (max-width:550px) {
+        #PostsNumber, #FollowersNumber, #FollowingNumber {
+            margin-left: 5%;
+        }
+        #Comment {
+            padding-left: 25px !important
+        }
+        #MenuButton {
+            margin-left: 152px;
+        }
+        #BackConversation {
+            margin-top: 7% !important;
+        }
+        #AddPost {
+            margin-left: 37% !important
+        }
+    }
+@media screen and (max-width:470px)
+{
+   #PostHead{
+       min-width:70% !important
+   }
+   #Back{
+       margin-left:10% !important
+   }
+    #Comment {
+        padding-left: 5px !important
+    }
+    #ConversationName{
+        font-size:20px !important
+    }
+}
+    @media screen and (max-width:390px) {
+        #Like, #Comment, #Share {
+            padding: 0 !important
+        }
+        #BackConversation {
+            margin-top: 13% !important;
+        }
+        #Comment{
+            font-size:18px !important
+        }
+        
+    }

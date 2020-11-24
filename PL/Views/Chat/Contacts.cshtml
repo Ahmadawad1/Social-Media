@@ -1,0 +1,81 @@
+﻿@model IEnumerable<DAL.Users>
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+
+<link href="~/Styles/MyProfile.css" rel="stylesheet" />
+
+<center class="Comments">
+    @if (Model.Count() == 0)
+    {
+
+        <p id="NoContacts">No Contacts Available </p>
+        <br />
+        
+    }
+    else
+    {
+
+
+        <ul id="CommentsList">
+            <li style="margin:10px;">@Model.Count() Contacts</li>
+            @foreach (var i in Model)
+            {
+
+                <li id="ResultItem" onclick="GoToProfile('@i.ID')">
+                    <div style="display:inline-flex">
+                        <div><img width="55" height="55" style="border:1px solid #fff;border-radius:100%" src="@Url.Content(i.ProfileImage)" /></div>
+                        <div>
+                            <p style="font-size:25px"> &nbsp;&nbsp; @i.Name</p>
+                            <p id="Date" style="margin-top:-20px;font-size:15px">&nbsp;&nbsp; &nbsp;&nbsp; @i.Major @i.Job @i.Email</p>
+                        </div>
+                    </div>
+
+
+                </li>
+            }
+        </ul>
+    }
+</center>
+<script>
+    function GoToProfile(id) {
+
+        window.location.href = '/Chat/Conversation?contactId=' + id;
+
+    }
+
+</script>
+<style>
+    #ResultImage {
+        margin-left: 30%;
+        margin-top: 50px
+    }
+
+   
+    #NoContacts {
+        font-size: 19px;
+        margin-left: 28%;
+      padding-top:100px
+    }
+    #ResultItem {
+        background-color: inherit;
+        border-bottom: 1px solid white;
+        padding: 10px;
+        cursor: pointer;
+    }
+
+        #ResultItem:hover {
+            opacity: 0.7;
+        }
+
+    @@media screen and (max-width:430px) {
+        #ResultImage {
+            margin-left: 15% !important;
+        }
+
+        #NoResult {
+            margin-left: 1% !important;
+            font-size: 20px !important;
+        }
+    }
+</style>

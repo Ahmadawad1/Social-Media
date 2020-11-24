@@ -1,0 +1,127 @@
+﻿@model DAL.Users
+@{
+    Layout = "~/Views/Shared/Layout.cshtml";
+}
+<link href="~/Styles/MyProfile.css" rel="stylesheet" />
+<script src="~/Scripts/MyProfile.js"></script>
+<br />
+
+<center id="AddPost">
+    <img src="~/Images/addpost.png" width="30" height="30" id="AddPostImg" data-toggle="modal" data-target="#AddPostModal" />
+</center>
+@if (ViewBag.Posts.Count > 0)
+{
+
+
+    foreach (var post in ViewBag.Posts)
+    {
+        <center class="Posts" id="@post.Post.ID">
+
+
+            @if (post.Post.Type == "Text")
+            {
+                <div style="display:inline-flex;padding:10px;">
+
+                    <div><img id="SmallImage" src="@Url.Content(post.Image)" /></div>
+                    <div>
+                        <h5>@post.Name</h5>
+                        <p id="Date" style="margin-top:-10px">@post.Post.Date</p>
+                    </div>
+                    <input type="hidden" id="PostID" name="PostID" value="@post.Post.ID">
+                    <div id="PostIcons">
+
+                        <img src="~/Images/open-menu.png" onclick="ShowModal('@post.Post.ID')" width="17" height="17" style="margin-left:7px" id="MenuButton" />
+
+                    </div>
+                </div>
+                <p id="Caption">@post.Post.PathOrText</p>
+            }
+            else if (post.Post.Type == "Image")
+            {
+                <div style="display:inline-flex;padding:10px;">
+
+                    <div><img id="SmallImage" src="@Url.Content(post.Image)" /></div>
+                    <div>
+                        <h5>@post.Name</h5>
+                        <p id="Date" style="margin-top:-10px">@post.Post.Date</p>
+                    </div>
+                    <input type="hidden" id="PostID" name="PostID" value="@post.Post.ID">
+                    <div id="PostIcons">
+                       <img src="~/Images/open-menu.png" onclick="ShowModal('@post.Post.ID')" width="17" height="17" style="margin-left:7px" id="MenuButton" />
+
+                    </div>
+                </div>
+                <p id="Caption">@post.Post.ShareOrImageCaption</p>
+                <img src="@Url.Content(post.Post.PathOrText)" id="PostImage" />
+            }
+
+            <div id="ReactionsNumbers"><label id="LikeNumber">@post.Post.Likes </label><p class="Word">Likes</p>  <label id="CommentNumber">@post.Post.Comments </label> <p class="Word">Comments</p><label id="ShareNumber">@post.Post.Shares </label><p class="Word">Shares</p></div>
+            <div id="Reactions">
+                @if (ViewBag.Likes.Count > 0)
+                {
+                    bool isLiked = false;
+                    foreach (var i in ViewBag.Likes)
+                    {
+
+                        if (i.PostID == post.Post.ID && i.Liker == Model.ID)
+                        {
+                            isLiked = true;
+                        }
+                    }
+                    if (isLiked)
+                    {
+                        <button id="Like" style="color:#c3c3c3" onclick="Like('@post.Post.ID','@Model.ID','@Model.ID',@post.Post.Likes)"> <img src="~/Images/like.png" style="opacity:0.2" width="20" height="20" id="LikeIcon" />&nbsp; Like</button>
+
+                    }
+                    else
+                    {
+                        <button id="Like" onclick="Like('@post.Post.ID','@Model.ID','@Model.ID',@post.Post.Likes)"> <img src="~/Images/like.png" width="20" height="20" id="LikeIcon" />&nbsp; Like</button>
+                    }
+
+                }
+                else
+                {
+                    <button id="Like" onclick="Like('@post.Post.ID','@Model.ID','@Model.ID',@post.Post.Likes)"> <img src="~/Images/like.png" width="20" height="20" id="LikeIcon" />&nbsp; Like</button>
+                }
+
+                @Html.ActionLink(" Comments", "Comments", "MyProfile", new { @postID = post.Post.ID, @poster = post.Email }, new { @id = "Comment", @class = "fa fa-comments",@target="_blank", @style = "text-decoretion:none;padding-left:45px;font-size:20px" })
+
+                <button id="Share"> <img src="~/Images/share.png" width="20" height="20" id="ShareIcon" />&nbsp;Share</button>
+            </div>
+        </center>
+    }
+
+}
+else
+{
+    <center id="Posts" style="text-align:center;padding:50px;">
+        <h4>No Posts Yet !</h4>
+    </center>
+}
+<link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+<script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+@using (Html.BeginForm("Post", "Feed", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+{
+    <div class="modal fade" id="AddPostModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLongTitle">Add New Image or Text</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <input type="text" autocomplete="off" class="form-control" name="caption" placeholder="Caption.." /><br />
+                    <h3>Upload Image</h3>
+
+                    <input type="file" name="image" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Hide</button>
+                    <button type="submit" class="btn btn-primary">Post</button>
+                </div>
+            </div>
+        </div>
+    </div>
+}

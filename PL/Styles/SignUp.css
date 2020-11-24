@@ -1,0 +1,123 @@
+﻿#bgImg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    left:0;
+    top:0;
+}
+input:focus,button:focus{
+    outline:none
+}
+#container {
+    display: inline-flex;
+    flex-direction: row;
+    z-index: 3;
+    position: absolute;
+    padding: 10px;
+    margin-left: 35%;
+    top: 11%;
+    border-radius: 10px;
+    background-color: #895d3f
+}
+
+label {
+    font-size: 15px;
+    color: red;
+    font-weight: bold
+}
+#form {
+    padding: 30px;
+    width:100%;
+    text-align:center;
+    
+}
+#icon {
+    border-bottom-left-radius: 5px;
+    border-top-left-radius: 5px;
+    height: 40px;
+    background-color: white;
+    color: #895d3f;
+    border: hidden;
+    padding:5px;
+    border-right:1px #bfbdbd solid;
+    max-height:40px
+    
+}
+#IconPlusText {
+    height: 40px;
+    display: inline-flex;
+    flex-direction: row;
+}
+#form .error{
+    color:#ff3b3b;
+   font-weight:bolder
+}
+input {
+    height: 40px;
+    width: 320px;
+    border: hidden;
+    border-bottom-right-radius: 5px;
+    border-top-right-radius: 5px;
+    min-height: 40px
+}
+button {
+    height: 40px;
+    width: 350px;
+    border-radius: 5px;
+    border: hidden;
+    background-color: white;
+    color: #895d3f;
+    font-weight:bolder;
+   transition:0.5s ease
+}
+    button:hover {
+        background-color: #895d3f;
+        border:white 1px solid;
+        color: white;
+    }
+
+
+@media screen and (max-width:900px) {
+    #container {
+        margin-left: 20% !important;
+        
+    }
+}
+@media screen and (max-width:600px) {
+    #container {
+        margin-left: 5% !important;
+    }
+}
+@media screen and (max-width:500px) {
+    #container {
+        margin-left: 0 !important;
+        background-image:linear-gradient(to right,#895d3f,#ce7336);
+        height:100% !important;
+        width:100% !important;
+        top:0
+
+    }
+    #bgImg{
+        display:none
+    }
+    
+   
+}
+@media screen and (max-width:400px) {
+    #IconPlusText {
+       width:100%
+    }
+    #container{
+       padding:0 !important
+    }
+    #TextDiv{
+        width:90% !important
+    }
+    input {
+        width: 100% !important
+    }
+    button {
+        width: 100% !important
+    }
+
+}

@@ -1,0 +1,108 @@
+﻿
+@{
+
+
+
+}
+
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1" />
+    <title>Home</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+    <link href="~/lib/font-awesome/css/fontawesome.css" rel="stylesheet" />
+    <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="~/lib/jquery/jquery.js"></script>
+    <script src="~/lib/font-awesome/js/fontawesome.js"></script>
+  
+    <link href="~/Styles/Layout.css" rel="stylesheet" />
+    <script src="~/Scripts/Layout.js"></script>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+</head>
+<body>
+    <div id="navBar">
+        <img src="~/Images/weread.png" height="50" width="50" id="imgLogo" /> <h4 id="HeaderWeRead"> WeRead</h4>
+        <span id="SearchIcon" onclick="Search()" class="fa fa-search"></span><input type="search" id="Search" placeholder="Search Users..." />
+        <ul id="SearchResult">
+        </ul>
+        <span id="IconContainer">
+            <a href="@Url.Action("Feed", "Feed")" id="FeedIcon"><img src="~/Images/browser.png" width="25" height="25" /></a>
+            <span id="BellIcon"><img src="~/Images/bell.png" width="25" height="25" /></span>
+            <span id="Notification">
+                @if (ViewBag.Notifications.Capacity > 0)
+                {
+                    foreach (var i in ViewBag.Notifications)
+                    {
+                        <span id="NotificationItem"> <img src="@Url.Content(i.Image)" id="NotiImage" /> <bold id="NotiName">@i.Name</bold> <text id="NotiContent">@i.Content</text></span>
+
+                        <hr />
+                    }
+                }
+                else
+                {
+                    <span>  <bold id="NoNoti">No Notifications Available</bold> </span>
+                }
+            </span>
+            <a href="@Url.Action("Contacts", "Chat")" id="ChatIcon"><img src="~/Images/conversation.png" width="25" height="25" /></a>
+
+            <span id="ProfileIcon"><img src="@Url.Content(Session["ImageProfile"].ToString())" width="40" height="40" id="ProfileIconImage" /><text id="Username">@Session["Name"]</text></span>
+            <span id="MenuAccount">
+                <a style="color:#000000" href='@Url.Action("MyProfile", "MyProfile")'>
+                    <span id="ViewProfile">  <img src="~/Images/view.png" width="20" height="20" id="" /> View Profile</span>
+                </a><br /><br /> <a style="color:#000000" href='@Url.Action("Account", "Edit")'>   <span><img src="~/Images/settings.png" width="20" height="20" /> Account Settings</span></a><br /><br />
+                <span id="Feedback">  <img src="~/Images/feedback.png" width="20" height="20" id="" /> Give Feedback</span><br /><br />
+
+
+                <span><img src="~/Images/about.png" width="20" height="20" id="" /> Help and Support</span> <br><br />
+                <a style="color:#000000" href='@Url.Action("SignOut", "SignIn")'>  <span id="SignOut"><img src="~/Images/logout.png" width="20" height="20" /> Sign Out</span></a>
+            </span>
+
+        </span>
+        <span id="OptionsIcon"><img src="~/Images/open-menu.png" width="25" height="25" /></span>
+    </div> 
+    <span id="navBarNoti">
+        
+        <span onclick="HideNoti()" id="HideNoti"><img src="~/Images/hide.png" width="25" height="25" /></span>
+        <br /><hr />
+        @if (ViewBag.Notifications.Capacity > 0)
+        {
+            foreach (var i in ViewBag.Notifications)
+            {
+                <span id="NotificationItem"> <img src="@Url.Content(i.Image)" id="NotiImage" /> <bold id="NotiName">@i.Name</bold> <text id="NotiContent">@i.Content</text></span>
+
+                <hr />
+            }
+        }
+        else
+        {
+            <span>  <bold id="NoNoti">No Notifications Available</bold> </span>
+        }
+    </span>
+    <div id="navBarY">
+        <input type="hidden" id="MyName" value="@Session["Name"].ToString()" />
+        <div id="IconList">
+
+            <a href='@Url.Action("MyProfile", "MyProfile")'><span id="ProfileIcon"><img src="@Url.Content(Session["ImageProfile"].ToString())" width="40" height="40" id="ProfileIconImage" /><text id="Username">@Session["Name"]</text></span></a>
+            <a onclick="ShowNoti()">     <span id="HeaderIcons"><img src="~/Images/bell.png" width="25" height="25" /><text>Notifications</text></span></a>
+
+            <a href="@Url.Action("Contacts","Chat")">       <span id="HeaderIcons"><img src="~/Images/conversation.png" width="25" height="25" /><text>Messages</text></span></a>
+            <a href='@Url.Action("Account", "Edit")'><span id="HeaderIcons"><img src="~/Images/settingsWhite.png" width="25" height="25" /><text>Account Settings</text></span></a>
+            
+
+
+            <a href='@Url.Action("SignOut", "SignIn")'>     <span id="HeaderIcons"><img src="~/Images/logoutWhite.png" width="25" height="25" /><text>SignOut</text></span></a>
+        </div>
+    </div>
+    <div id="MainContent">
+        @RenderBody()
+    </div>
+</body>
+</html>

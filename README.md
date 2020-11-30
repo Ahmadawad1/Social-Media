@@ -1,5 +1,5 @@
 # Social-Media
-It's a social media platform called WeRead. It has been developed using .NET MVC. The project is embed with video to explain the functionalities.
+It's a social media platform called WeRead. It has been developed using .NET MVC. The project is embed with videos to explain the functionalities.
 
 # Technologies
 * Media Query & Responsive UI
